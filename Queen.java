@@ -1,21 +1,23 @@
 public class Queen {
 
     static int  N;
-    public static void solveQueens(int [][] board, int row){
+    public static boolean solveQueens(int [][] board, int row){
         if(row >= N){
             printBoard(board);
-            return ;
+            return true ;
         }
 
         for(int col =0;col<N;col++){
             if(isSafe( board ,  row ,  col)){
                 board[row][col] =1;
                 
-                solveQueens(board, row+1);
+                if(solveQueens(board, row+1))
+                    return true;
                 
                 board[row][col] =0;
             }
         }
+        return false;
         
     }
 
@@ -55,7 +57,7 @@ public class Queen {
     public static void main(String[] args) {
         N=8;
         int [][] board = new int[N][N];
-        board[0][0] =1 ;
-        solveQueens(board, 1);
+        
+        solveQueens(board, 0);
     }
 }
